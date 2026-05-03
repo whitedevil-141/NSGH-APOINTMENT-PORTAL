@@ -8,278 +8,8 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <style>
-        /* Premium UI CSS Variables */
-        :root {
-            --primary: #2563eb;
-            --primary-hover: #1d4ed8;
-            --primary-light: #eff6ff;
-            --bg-color: #f8fafc;
-            --surface: #ffffff;
-            --text-main: #0f172a;
-            --text-muted: #64748b;
-            --border: #e2e8f0;
-            --border-hover: #cbd5e1;
-            --danger: #ef4444;
-            --danger-hover: #dc2626;
-            --danger-light: #fef2f2;
-            --success: #10b981;
-            --success-light: #ecfdf5;
-            --warning: #f59e0b;
-            --warning-light: #fffbeb;
-            --shadow-sm: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
-            --shadow-md: 0 4px 6px -1px rgba(0, 0, 0, 0.05), 0 2px 4px -2px rgba(0, 0, 0, 0.05);
-            --shadow-lg: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.01);
-            --shadow-primary: 0 4px 14px 0 rgba(37, 99, 235, 0.25);
-            --radius-sm: 8px;
-            --radius-md: 12px;
-            --radius-lg: 20px;
-            --transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-            font-family: 'Inter', sans-serif;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-        }
-
-        /* Custom Scrollbar */
-        ::-webkit-scrollbar { width: 8px; height: 8px; }
-        ::-webkit-scrollbar-track { background: var(--bg-color); }
-        ::-webkit-scrollbar-thumb { background: #cbd5e1; border-radius: 4px; }
-        ::-webkit-scrollbar-thumb:hover { background: #94a3b8; }
-
-        body {
-            background-color: var(--bg-color);
-            background-image: radial-gradient(#e2e8f0 1px, transparent 1px);
-            background-size: 24px 24px;
-            color: var(--text-main);
-            line-height: 1.6;
-            min-height: 100vh;
-            display: flex;
-            flex-direction: column;
-        }
-
-        /* View Transition Animation */
-        section:not(.hidden) {
-            animation: slideUpFade 0.5s cubic-bezier(0.16, 1, 0.3, 1) forwards;
-        }
-
-        @keyframes slideUpFade {
-            from { opacity: 0; transform: translateY(16px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-
-        /* Typography */
-        h1, h2, h3, h4 { color: var(--text-main); font-weight: 600; letter-spacing: -0.02em; }
-        h1 { font-size: 2rem; }
-        h2 { font-size: 1.5rem; }
-        h3 { font-size: 1.25rem; }
-        p { color: var(--text-muted); }
-
-        /* Utility Classes */
-        .hidden { display: none !important; }
-        .text-center { text-align: center; }
-        .text-sm { font-size: 0.875rem; }
-        .font-medium { font-weight: 500; }
-        .mt-1 { margin-top: 0.5rem; } .mt-2 { margin-top: 1rem; } .mt-4 { margin-top: 2rem; }
-        .mb-2 { margin-bottom: 1rem; } .mb-4 { margin-bottom: 2rem; }
-        .flex { display: flex; } .flex-col { display: flex; flex-direction: column; }
-        .items-center { align-items: center; } .justify-between { justify-content: space-between; } .justify-center { justify-content: center; }
-        .gap-2 { gap: 0.5rem; } .gap-4 { gap: 1rem; } .gap-6 { gap: 1.5rem; }
-        .w-full { width: 100%; }
-
-        .badge { padding: 0.35rem 0.75rem; border-radius: 99px; font-size: 0.75rem; font-weight: 600; letter-spacing: 0.01em; }
-        .badge-success { background: var(--success-light); color: #047857; }
-        .badge-warning { background: var(--warning-light); color: #b45309; }
-        .badge-danger { background: var(--danger-light); color: #b91c1c; }
-
-        /* Buttons */
-        .btn {
-            display: inline-flex;
-            align-items: center;
-            justify-content: center;
-            padding: 0.625rem 1.25rem;
-            border-radius: var(--radius-sm);
-            font-weight: 500;
-            cursor: pointer;
-            transition: var(--transition);
-            border: 1px solid transparent;
-            outline: none;
-            font-size: 0.875rem;
-            gap: 0.5rem;
-        }
-        .btn:disabled { opacity: 0.6; cursor: not-allowed; transform: none !important; box-shadow: none !important; }
-        .btn:active:not(:disabled) { transform: scale(0.97); }
-        .btn-primary { background-color: var(--primary); color: white; box-shadow: var(--shadow-primary); }
-        .btn-primary:hover:not(:disabled) { background-color: var(--primary-hover); box-shadow: 0 6px 20px 0 rgba(37, 99, 235, 0.35); transform: translateY(-1px); }
-        .btn-danger { background-color: var(--danger); color: white; }
-        .btn-danger:hover:not(:disabled) { background-color: var(--danger-hover); box-shadow: 0 4px 14px 0 rgba(239, 68, 68, 0.39); transform: translateY(-1px); }
-        .btn-outline { background-color: var(--surface); border-color: var(--border); color: var(--text-main); }
-        .btn-outline:hover:not(:disabled) { border-color: var(--border-hover); background-color: var(--bg-color); }
-
-        /* Cards */
-        .card {
-            background: var(--surface);
-            border-radius: var(--radius-lg);
-            box-shadow: var(--shadow-sm);
-            padding: 2rem;
-            border: 1px solid rgba(226, 232, 240, 0.8);
-            transition: var(--transition);
-        }
-
-        /* Inputs */
-        .input-group { display: flex; flex-direction: column; gap: 0.5rem; margin-bottom: 1.25rem; }
-        label { font-size: 0.875rem; font-weight: 600; color: var(--text-main); }
-        input, select {
-            padding: 0.75rem 1rem;
-            background-color: #f8fafc;
-            border: 1px solid var(--border);
-            border-radius: var(--radius-sm);
-            font-size: 0.95rem;
-            color: var(--text-main);
-            transition: var(--transition);
-            width: 100%;
-        }
-        input:focus, select:focus { 
-            outline: none; 
-            border-color: var(--primary); 
-            background-color: var(--surface);
-            box-shadow: 0 0 0 4px var(--primary-light); 
-        }
-
-        /* Navigation */
-        .navbar {
-            background: rgba(255, 255, 255, 0.85);
-            backdrop-filter: blur(12px);
-            -webkit-backdrop-filter: blur(12px);
-            padding: 1rem 2rem;
-            border-bottom: 1px solid rgba(226, 232, 240, 0.8);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            position: sticky;
-            top: 0;
-            z-index: 40;
-        }
-        .logo { font-size: 1.5rem; font-weight: 700; color: var(--primary); display: flex; align-items: center; gap: 0.5rem; cursor: pointer; letter-spacing: -0.03em; }
-        .nav-links { display: flex; gap: 1rem; align-items: center; }
-
-        /* Main Container */
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            width: 100%;
-            flex: 1;
-        }
-
-        /* Tables */
-        .table-container { overflow-x: auto; background: var(--surface); border-radius: var(--radius-lg); border: 1px solid var(--border); box-shadow: var(--shadow-sm); }
-        table { width: 100%; border-collapse: collapse; text-align: left; }
-        th, td { padding: 1.25rem 1rem; border-bottom: 1px solid var(--border); font-size: 0.9rem; }
-        th { background: #f8fafc; font-weight: 600; color: var(--text-muted); text-transform: uppercase; letter-spacing: 0.05em; font-size: 0.75rem; }
-        tr:last-child td { border-bottom: none; }
-        tr:hover td { background: var(--primary-light); }
-
-        /* Auth View */
-        #auth-view { max-width: 420px; margin: 4rem auto; position: relative; }
-        #auth-view::before {
-            content: ''; position: absolute; top: -2px; left: 0; right: 0; height: 4px;
-            background: linear-gradient(90deg, var(--primary), #818cf8);
-            border-radius: var(--radius-lg) var(--radius-lg) 0 0;
-        }
-        .auth-logo { text-align: center; margin-bottom: 2rem; font-size: 2.25rem; color: var(--primary); font-weight: 700; letter-spacing: -0.03em; }
-
-        /* Dashboard View */
-        .dashboard-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 1.5rem; margin-top: 2rem; }
-        .action-card { 
-            display: flex; flex-direction: column; align-items: flex-start; justify-content: center; 
-            padding: 2.5rem 2rem; cursor: pointer; position: relative; overflow: hidden;
-            border: 1px solid var(--border); background: var(--surface);
-        }
-        .action-card:hover { 
-            border-color: var(--primary); 
-            box-shadow: var(--shadow-lg); 
-            transform: translateY(-4px); 
-        }
-        .action-card svg { 
-            width: 48px; height: 48px; color: var(--primary); margin-bottom: 1.5rem; 
-            background: var(--primary-light); padding: 10px; border-radius: var(--radius-md);
-        }
-
-        /* Doctor Listing */
-        .filter-bar { display: flex; gap: 1rem; margin-bottom: 2.5rem; flex-wrap: wrap; background: var(--surface); padding: 1.25rem; border-radius: var(--radius-md); box-shadow: var(--shadow-sm); border: 1px solid var(--border); }
-        .doctor-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(300px, 1fr)); gap: 1.5rem; }
-        .doctor-card { display: flex; flex-direction: column; justify-content: space-between; padding: 1.5rem; }
-        .doctor-card:hover { box-shadow: var(--shadow-lg); transform: translateY(-4px); border-color: transparent; }
-        .doc-header { display: flex; align-items: center; gap: 1rem; margin-bottom: 1.25rem; }
-        .doc-avatar { 
-            width: 56px; height: 56px; border-radius: 16px; 
-            background: linear-gradient(135deg, var(--primary), #818cf8); 
-            color: white; display: flex; align-items: center; justify-content: center; 
-            font-size: 1.5rem; font-weight: 600; box-shadow: 0 4px 10px rgba(37,99,235,0.2);
-        }
-        .doc-info p { font-size: 0.875rem; margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; color: var(--text-muted); }
-        .doc-info svg { width: 16px; height: 16px; color: var(--text-main); }
-
-        /* Admin Panel */
-        .admin-layout { display: flex; gap: 2.5rem; min-height: 70vh; }
-        .admin-sidebar { width: 260px; background: transparent; display: flex; flex-direction: column; gap: 0.5rem; }
-        .admin-content { flex: 1; display: flex; flex-direction: column; gap: 1.5rem; padding: 0; background: transparent; border: none; box-shadow: none; }
-        .sidebar-item { padding: 0.875rem 1.25rem; border-radius: var(--radius-sm); cursor: pointer; font-weight: 500; transition: var(--transition); color: var(--text-muted); border: 1px solid transparent; }
-        .sidebar-item:hover { background: var(--surface); color: var(--text-main); border-color: var(--border); }
-        .sidebar-item.active { background: var(--surface); color: var(--primary); border-color: var(--border); box-shadow: var(--shadow-sm); }
-
-        /* Modals */
-        .modal-overlay { 
-            position: fixed; top: 0; left: 0; width: 100%; height: 100%; 
-            background: rgba(15, 23, 42, 0.4); backdrop-filter: blur(8px); -webkit-backdrop-filter: blur(8px);
-            display: flex; align-items: center; justify-content: center; z-index: 50; 
-            opacity: 0; visibility: hidden; transition: all 0.3s ease; 
-        }
-        .modal-overlay.active { opacity: 1; visibility: visible; }
-        .modal-content { 
-            background: var(--surface); border-radius: var(--radius-lg); width: 100%; max-width: 520px; 
-            padding: 2.5rem; transform: scale(0.95) translateY(10px); transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1); 
-            box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25); border: 1px solid rgba(255,255,255,0.1);
-        }
-        .modal-overlay.active .modal-content { transform: scale(1) translateY(0); }
-        .modal-header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 2rem; }
-        .close-btn { background: var(--bg-color); border: none; width: 32px; height: 32px; border-radius: 50%; display: flex; align-items: center; justify-content: center; cursor: pointer; color: var(--text-muted); transition: var(--transition); }
-        .close-btn:hover { background: var(--border); color: var(--text-main); transform: rotate(90deg); }
-
-        /* Toast Notifications */
-        .toast-container { position: fixed; bottom: 2rem; right: 2rem; display: flex; flex-direction: column; gap: 0.75rem; z-index: 100; }
-        .toast { 
-            background: var(--surface); border: 1px solid var(--border); box-shadow: var(--shadow-lg); 
-            padding: 1rem 1.25rem; border-radius: var(--radius-md); display: flex; align-items: center; gap: 0.875rem; 
-            transform: translateX(120%) scale(0.9); opacity: 0; transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1); 
-            font-weight: 500; font-size: 0.9rem;
-        }
-        .toast.show { transform: translateX(0) scale(1); opacity: 1; }
-        .toast.success svg { color: var(--success); }
-        .toast.error svg { color: var(--danger); }
-
-        /* Loaders / States */
-        .loader { border: 2px solid rgba(255,255,255,0.3); border-top: 2px solid #fff; border-radius: 50%; width: 18px; height: 18px; animation: spin 0.8s linear infinite; display: inline-block; }
-        .btn-outline .loader { border-color: var(--border); border-top-color: var(--primary); }
-        @keyframes spin { 0% { transform: rotate(0deg); } 100% { transform: rotate(360deg); } }
-        .empty-state { text-align: center; padding: 5rem 2rem; color: var(--text-muted); background: var(--surface); border-radius: var(--radius-lg); border: 1px dashed var(--border); }
-        .empty-state svg { width: 72px; height: 72px; margin-bottom: 1.25rem; color: var(--border-hover); }
-
-        /* Responsive */
-        @media (max-width: 768px) {
-            .admin-layout { flex-direction: column; gap: 1.5rem; }
-            .admin-sidebar { width: 100%; flex-direction: row; overflow-x: auto; padding-bottom: 0.5rem; }
-            .sidebar-item { white-space: nowrap; }
-            .container { padding: 1.5rem 1rem; }
-            .card { padding: 1.5rem; }
-        }
-    </style>
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="src/css/styles.css">
 </head>
 <body>
 
@@ -288,48 +18,173 @@
 
     <!-- Navigation -->
     <nav class="navbar hidden" id="main-nav">
-        <div class="logo" onclick="navigate('dashboard')">
+        <div class="logo" onclick="goHome()">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
             MediCare
         </div>
         <div class="nav-links">
-            <span id="nav-user-name" class="hidden sm:block font-medium"></span>
-            <button class="btn btn-outline" onclick="navigate('admin')">Admin</button>
+            <span id="nav-user-name" class="font-medium"></span>
+            <button class="btn btn-outline" id="admin-nav-btn" onclick="navigate('admin')" style="display:none;">Admin Panel</button>
             <button class="btn btn-primary" onclick="logout()">Logout</button>
         </div>
     </nav>
 
     <!-- Main Content -->
     <main class="container">
-        
+
         <!-- View 1: Authentication -->
         <section id="auth-view" class="card">
             <div class="auth-logo">
                 <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin: 0 auto; display: block;"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
                 MediCare
             </div>
-            <h2 class="text-center mb-4">Patient Login</h2>
-            
-            <div id="phone-step">
+
+            <div class="auth-tabs">
+                <button class="auth-tab active" id="tab-login" onclick="switchAuthTab('login')">Login</button>
+                <button class="auth-tab" id="tab-register" onclick="switchAuthTab('register')">Register</button>
+            </div>
+
+            <!-- LOGIN TAB -->
+            <div id="login-content">
+                <h2 class="text-center mb-4">Welcome Back</h2>
                 <div class="input-group">
                     <label>Phone Number</label>
-                    <input type="tel" id="auth-phone" placeholder="e.g. +1 234 567 8900" value="1234567890">
+                    <input type="tel" id="login-phone" placeholder="e.g. 1112223333" autocomplete="username">
                 </div>
-                <button class="btn btn-primary w-full mt-2" style="width:100%" onclick="sendOTP()" id="btn-send-otp">Send OTP</button>
-                <div class="text-center mt-4" style="font-size: 0.8rem; color: var(--text-muted)">
-                    Admin Login? Use phone: <strong>admin</strong>
+                <div class="input-group">
+                    <label>Password</label>
+                    <input type="password" id="login-password" placeholder="Enter your password" autocomplete="current-password">
+                </div>
+                <button class="btn btn-primary" style="width:100%" onclick="loginWithPassword()" id="btn-login">Login</button>
+                <div class="text-center mt-2 text-sm">
+                    <span class="auth-link" onclick="switchAuthTab('forgot')">Forgot password?</span>
+                </div>
+                <div class="auth-demo-box">
+                    <strong>Demo accounts:</strong><br>
+                    Admin → <code>admin</code> / <code>admin123</code><br>
+                    Patient → <code>1112223333</code> / <code>password123</code><br>
+                    Doctor → <code>9999999991</code> / <code>doctor123</code>
                 </div>
             </div>
 
-            <div id="otp-step" class="hidden">
-                <p class="text-center mb-4 text-sm">OTP sent to <span id="display-phone" style="font-weight:bold;"></span></p>
-                <div class="input-group">
-                    <label>Enter 6-digit OTP (Mock: 123456)</label>
-                    <input type="text" id="auth-otp" maxlength="6" placeholder="------" style="text-align:center; font-size: 1.5rem; letter-spacing: 0.5rem;">
+            <!-- REGISTER TAB -->
+            <div id="register-content" class="hidden">
+                <h2 class="text-center mb-4">Create Account</h2>
+
+                <!-- Step 1: phone + password -->
+                <div id="register-step-1">
+                    <div class="input-group">
+                        <label>Phone Number</label>
+                        <input type="tel" id="reg-phone" placeholder="e.g. 1234567890">
+                    </div>
+                    <div class="input-group">
+                        <label>Password</label>
+                        <input type="password" id="reg-password" placeholder="At least 6 characters">
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm Password</label>
+                        <input type="password" id="reg-confirm-password" placeholder="Re-enter password">
+                    </div>
+                    <button class="btn btn-primary" style="width:100%" onclick="startRegistration()" id="btn-start-reg">Send OTP</button>
                 </div>
-                <div class="flex gap-2 mt-2">
-                    <button class="btn btn-outline" style="flex:1" onclick="backToPhone()">Back</button>
-                    <button class="btn btn-primary" style="flex:2" onclick="verifyOTP()" id="btn-verify-otp">Verify & Login</button>
+
+                <!-- Step 2: OTP -->
+                <div id="register-step-2" class="hidden">
+                    <p class="text-center mb-4 text-sm">OTP sent to <strong id="reg-display-phone"></strong></p>
+                    <div class="input-group">
+                        <label>Enter 6-digit OTP (Mock: 123456)</label>
+                        <input type="text" id="reg-otp" maxlength="6" inputmode="numeric" placeholder="------" style="text-align:center; font-size:1.5rem; letter-spacing:0.5rem;">
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" style="flex:1" onclick="showRegStep(1)">Back</button>
+                        <button class="btn btn-primary" style="flex:2" onclick="verifyRegistrationOTP()" id="btn-verify-reg-otp">Verify OTP</button>
+                    </div>
+                </div>
+
+                <!-- Step 3: profile -->
+                <div id="register-step-3" class="hidden">
+                    <p class="text-center mb-4 text-sm">Complete your profile</p>
+                    <form id="registration-form" onsubmit="event.preventDefault(); completeRegistration();">
+                        <div class="input-group">
+                            <label>Full Name</label>
+                            <input type="text" id="reg-name" required placeholder="e.g. John Doe">
+                        </div>
+                        <div class="flex gap-4">
+                            <div class="input-group" style="flex:1">
+                                <label>Age</label>
+                                <input type="number" id="reg-age" required min="1" max="150" placeholder="e.g. 28">
+                            </div>
+                            <div class="input-group" style="flex:1">
+                                <label>Gender</label>
+                                <select id="reg-gender" required>
+                                    <option value="">Select</option>
+                                    <option value="Male">Male</option>
+                                    <option value="Female">Female</option>
+                                    <option value="Other">Other</option>
+                                </select>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label>Blood Group</label>
+                            <select id="reg-blood-group" required>
+                                <option value="">Select Blood Group</option>
+                                <option value="O+">O+</option>
+                                <option value="O-">O-</option>
+                                <option value="A+">A+</option>
+                                <option value="A-">A-</option>
+                                <option value="B+">B+</option>
+                                <option value="B-">B-</option>
+                                <option value="AB+">AB+</option>
+                                <option value="AB-">AB-</option>
+                            </select>
+                        </div>
+                        <div class="input-group">
+                            <label>Email (Optional)</label>
+                            <input type="email" id="reg-email" placeholder="e.g. john@example.com">
+                        </div>
+                        <button type="submit" class="btn btn-primary" style="width:100%" id="btn-complete-reg">Complete Registration</button>
+                    </form>
+                </div>
+            </div>
+
+            <!-- FORGOT PASSWORD TAB -->
+            <div id="forgot-content" class="hidden">
+                <h2 class="text-center mb-4">Reset Password</h2>
+
+                <div id="forgot-step-1">
+                    <div class="input-group">
+                        <label>Registered Phone Number</label>
+                        <input type="tel" id="forgot-phone" placeholder="Enter your phone number">
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" style="flex:1" onclick="switchAuthTab('login')">Back to Login</button>
+                        <button class="btn btn-primary" style="flex:2" onclick="sendForgotOTP()" id="btn-forgot-otp">Send OTP</button>
+                    </div>
+                </div>
+
+                <div id="forgot-step-2" class="hidden">
+                    <p class="text-center mb-4 text-sm">OTP sent to <strong id="forgot-display-phone"></strong></p>
+                    <div class="input-group">
+                        <label>Enter 6-digit OTP (Mock: 123456)</label>
+                        <input type="text" id="forgot-otp" maxlength="6" inputmode="numeric" placeholder="------" style="text-align:center; font-size:1.5rem; letter-spacing:0.5rem;">
+                    </div>
+                    <div class="flex gap-2">
+                        <button class="btn btn-outline" style="flex:1" onclick="showForgotStep(1)">Back</button>
+                        <button class="btn btn-primary" style="flex:2" onclick="verifyForgotOTP()" id="btn-verify-forgot-otp">Verify OTP</button>
+                    </div>
+                </div>
+
+                <div id="forgot-step-3" class="hidden">
+                    <p class="text-center mb-4 text-sm">Set a new password</p>
+                    <div class="input-group">
+                        <label>New Password</label>
+                        <input type="password" id="forgot-new-password" placeholder="At least 6 characters">
+                    </div>
+                    <div class="input-group">
+                        <label>Confirm New Password</label>
+                        <input type="password" id="forgot-confirm-password" placeholder="Re-enter new password">
+                    </div>
+                    <button class="btn btn-primary" style="width:100%" onclick="resetPassword()" id="btn-reset-password">Reset Password</button>
                 </div>
             </div>
         </section>
@@ -338,14 +193,14 @@
         <section id="dashboard-view" class="hidden">
             <h1 class="mb-2">Welcome, <span id="dash-user-name"></span>!</h1>
             <p class="mb-4">Manage your healthcare journey easily.</p>
-            
+
             <div class="card mb-4">
                 <h3>Your Profile</h3>
                 <div class="flex gap-4 mt-2" style="flex-wrap: wrap;">
                     <div style="flex:1; min-width:150px;"><strong>Phone:</strong> <span id="dash-user-phone"></span></div>
-                    <div style="flex:1; min-width:150px;"><strong>Gender:</strong> Male</div>
-                    <div style="flex:1; min-width:150px;"><strong>Age:</strong> 32</div>
-                    <div style="flex:1; min-width:150px;"><strong>Blood Group:</strong> O+</div>
+                    <div style="flex:1; min-width:150px;"><strong>Gender:</strong> <span id="dash-user-gender"></span></div>
+                    <div style="flex:1; min-width:150px;"><strong>Age:</strong> <span id="dash-user-age"></span></div>
+                    <div style="flex:1; min-width:150px;"><strong>Blood Group:</strong> <span id="dash-user-blood"></span></div>
                 </div>
             </div>
 
@@ -363,13 +218,35 @@
             </div>
         </section>
 
+        <!-- View 2B: Doctor Dashboard -->
+        <section id="doctor-dashboard-view" class="hidden">
+            <h1 class="mb-2">Welcome, <span id="doc-dash-name"></span>!</h1>
+            <p class="mb-4">Manage your appointments and patient information.</p>
+
+            <div class="card mb-4">
+                <h3>Your Profile</h3>
+                <div class="flex gap-4 mt-2" style="flex-wrap: wrap;">
+                    <div style="flex:1; min-width:150px;"><strong>Phone:</strong> <span id="doc-dash-phone"></span></div>
+                    <div style="flex:1; min-width:150px;"><strong>Specialty:</strong> <span id="doc-dash-specialty"></span></div>
+                </div>
+            </div>
+
+            <div class="dashboard-grid">
+                <div class="card action-card" onclick="navigate('appointments')">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
+                    <h3>View Appointments</h3>
+                    <p class="mt-1">See all scheduled appointments with your patients.</p>
+                </div>
+            </div>
+        </section>
+
         <!-- View 3: Doctor Listing -->
         <section id="doctors-view" class="hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2>Find a Doctor</h2>
                 <button class="btn btn-outline" onclick="navigate('dashboard')">Back to Dashboard</button>
             </div>
-            
+
             <div class="filter-bar">
                 <div class="input-group" style="margin:0; flex:1; min-width:200px;">
                     <input type="text" id="search-doctor" placeholder="Search doctor by name..." oninput="filterDoctors()">
@@ -382,6 +259,7 @@
                         <option value="Neurologist">Neurologist</option>
                         <option value="Pediatrician">Pediatrician</option>
                         <option value="General Physician">General Physician</option>
+                        <option value="Orthopedic">Orthopedic</option>
                     </select>
                 </div>
             </div>
@@ -396,18 +274,18 @@
             </div>
         </section>
 
-        <!-- View 4: My Appointments -->
+        <!-- View 4: Appointments -->
         <section id="appointments-view" class="hidden">
             <div class="flex justify-between items-center mb-4">
-                <h2>My Appointments</h2>
-                <button class="btn btn-outline" onclick="navigate('dashboard')">Back to Dashboard</button>
+                <h2 id="appointments-heading">My Appointments</h2>
+                <button class="btn btn-outline" id="appointments-back-btn" onclick="navigate('dashboard')">Back to Dashboard</button>
             </div>
 
             <div class="table-container">
                 <table id="appointments-table">
                     <thead>
                         <tr>
-                            <th>Doctor</th>
+                            <th id="appointments-th-1">Doctor</th>
                             <th>Date</th>
                             <th>Time</th>
                             <th>Room</th>
@@ -423,8 +301,8 @@
             <div id="appointments-empty" class="empty-state hidden">
                 <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"/><line x1="16" y1="2" x2="16" y2="6"/><line x1="8" y1="2" x2="8" y2="6"/><line x1="3" y1="10" x2="21" y2="10"/></svg>
                 <h3>No appointments yet</h3>
-                <p>You haven't booked any appointments.</p>
-                <button class="btn btn-primary mt-4" onclick="navigate('doctors')">Book Now</button>
+                <p id="appointments-empty-text">You haven't booked any appointments.</p>
+                <button class="btn btn-primary mt-4" id="appointments-book-btn" onclick="navigate('doctors')">Book Now</button>
             </div>
         </section>
 
@@ -432,18 +310,43 @@
         <section id="admin-view" class="hidden">
             <div class="flex justify-between items-center mb-4">
                 <h2>Admin Control Panel</h2>
-                <button class="btn btn-outline" onclick="navigate('dashboard')">Exit Admin</button>
             </div>
 
             <div class="admin-layout">
                 <aside class="admin-sidebar">
-                    <div class="sidebar-item active" onclick="switchAdminTab('admin-doctors')" id="tab-admin-doctors">Manage Doctors</div>
+                    <div class="sidebar-item active" onclick="switchAdminTab('admin-users')" id="tab-admin-users">Manage Users</div>
+                    <div class="sidebar-item" onclick="switchAdminTab('admin-doctors')" id="tab-admin-doctors">Manage Doctors</div>
                     <div class="sidebar-item" onclick="switchAdminTab('admin-appointments')" id="tab-admin-appointments">All Appointments</div>
                 </aside>
-                
+
                 <div class="admin-content card">
+                    <!-- Admin Users Sub-view -->
+                    <div id="admin-users-content">
+                        <div class="flex justify-between items-center mb-4">
+                            <h3>Patients Directory</h3>
+                            <span class="text-sm" style="color:var(--text-muted)">Patients self-register from the login page.</span>
+                        </div>
+                        <div class="table-container">
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <th>Name</th>
+                                        <th>Phone</th>
+                                        <th>Age</th>
+                                        <th>Gender</th>
+                                        <th>Email</th>
+                                        <th>Actions</th>
+                                    </tr>
+                                </thead>
+                                <tbody id="admin-user-list">
+                                    <!-- Populated by JS -->
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
                     <!-- Admin Doctors Sub-view -->
-                    <div id="admin-doctors-content">
+                    <div id="admin-doctors-content" class="hidden">
                         <div class="flex justify-between items-center mb-4">
                             <h3>Doctors Directory</h3>
                             <button class="btn btn-primary" onclick="openAdminDoctorModal()">+ Add Doctor</button>
@@ -453,7 +356,9 @@
                                 <thead>
                                     <tr>
                                         <th>Name</th>
+                                        <th>Phone</th>
                                         <th>Category</th>
+                                        <th>Time</th>
                                         <th>Room</th>
                                         <th>Actions</th>
                                     </tr>
@@ -507,7 +412,7 @@
                 </div>
                 <p class="text-sm"><strong>Available:</strong> <span id="modal-doc-time"></span> | <strong>Room:</strong> <span id="modal-doc-room"></span></p>
             </div>
-            
+
             <form id="booking-form" onsubmit="event.preventDefault(); confirmBooking();">
                 <input type="hidden" id="booking-doc-id">
                 <div class="input-group">
@@ -533,7 +438,7 @@
         </div>
     </div>
 
-    <!-- Modal: Admin Manage Doctor -->
+    <!-- Modal: Add / Edit Doctor (creates linked user account on add) -->
     <div id="admin-doctor-modal" class="modal-overlay">
         <div class="modal-content">
             <div class="modal-header">
@@ -545,6 +450,20 @@
                 <div class="input-group">
                     <label>Doctor Name</label>
                     <input type="text" id="admin-doc-name" required placeholder="Dr. John Doe">
+                </div>
+                <div class="flex gap-4">
+                    <div class="input-group" style="flex:1">
+                        <label>Phone Number</label>
+                        <input type="tel" id="admin-doc-phone" required placeholder="e.g. 9999999999">
+                    </div>
+                    <div class="input-group" style="flex:1" id="admin-doc-password-group">
+                        <label>Password</label>
+                        <input type="text" id="admin-doc-password" placeholder="Initial password">
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Email (Optional)</label>
+                    <input type="email" id="admin-doc-email" placeholder="e.g. doctor@hospital.com">
                 </div>
                 <div class="input-group">
                     <label>Specialty / Category</label>
@@ -558,14 +477,27 @@
                     </select>
                 </div>
                 <div class="flex gap-4">
+
                     <div class="input-group" style="flex:1">
-                        <label>Availability</label>
-                        <input type="text" id="admin-doc-time" required placeholder="e.g. 09:00 AM - 05:00 PM">
+                        <label>Start Time</label>
+                        <select id="admin-doc-start-time" required>
+                            <option value="">Select</option>
+                            <!-- Generate via JS -->
+                        </select>
                     </div>
+
+                    <div class="input-group" style="flex:1">
+                        <label>End Time</label>
+                        <select id="admin-doc-end-time" required>
+                            <option value="">Select</option>
+                        </select>
+                    </div>
+
                     <div class="input-group" style="flex:1">
                         <label>Room No.</label>
                         <input type="text" id="admin-doc-room" required placeholder="e.g. 101">
                     </div>
+
                 </div>
                 <div class="flex gap-2 mt-4">
                     <button type="button" class="btn btn-outline" style="flex:1" onclick="closeModal('admin-doctor-modal')">Cancel</button>
@@ -575,480 +507,51 @@
         </div>
     </div>
 
-    <script>
-        // --- Mock Data & State Management ---
-        const MOCK_API_DELAY = 600;
+    <!-- Modal: Edit User (Admin only) -->
+    <div id="admin-edit-user-modal" class="modal-overlay">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Edit Patient</h3>
+                <button class="close-btn" onclick="closeModal('admin-edit-user-modal')">&times;</button>
+            </div>
+            <form id="admin-edit-user-form" onsubmit="event.preventDefault(); saveEditedUser();">
+                <input type="hidden" id="edit-user-id">
+                <div class="input-group">
+                    <label>Full Name</label>
+                    <input type="text" id="edit-user-name" required>
+                </div>
+                <div class="input-group">
+                    <label>Phone Number</label>
+                    <input type="tel" id="edit-user-phone" required disabled>
+                </div>
+                <div class="flex gap-4">
+                    <div class="input-group" style="flex:1">
+                        <label>Age</label>
+                        <input type="number" id="edit-user-age" min="1" max="150">
+                    </div>
+                    <div class="input-group" style="flex:1">
+                        <label>Gender</label>
+                        <select id="edit-user-gender">
+                            <option value="">Select</option>
+                            <option value="Male">Male</option>
+                            <option value="Female">Female</option>
+                            <option value="Other">Other</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="input-group">
+                    <label>Email</label>
+                    <input type="email" id="edit-user-email">
+                </div>
+                <div class="flex gap-2 mt-4">
+                    <button type="button" class="btn btn-outline" style="flex:1" onclick="closeModal('admin-edit-user-modal')">Cancel</button>
+                    <button type="submit" class="btn btn-primary" style="flex:2" id="btn-save-edited-user">Save Changes</button>
+                </div>
+            </form>
+        </div>
+    </div>
 
-        let appState = {
-            currentUser: null,
-            currentView: 'auth',
-            doctors: [],
-            appointments: []
-        };
-
-        // Load data from JSON file
-        async function loadData() {
-            try {
-                const response = await fetch('./data.json');
-                if (!response.ok) throw new Error('Failed to load data');
-                const data = await response.json();
-                appState.doctors = data.doctors || [];
-                appState.appointments = data.appointments || [];
-                console.log('Data loaded successfully:', appState);
-                navigate('auth');
-            } catch (error) {
-                console.error('Error loading data:', error);
-                // Fallback to empty data
-                appState.doctors = [];
-                appState.appointments = [];
-                navigate('auth');
-            }
-        }
-
-        // --- Core UI Functions ---
-        function getEl(id) { return document.getElementById(id); }
-
-        function showToast(message, type = 'success') {
-            const container = getEl('toast-container');
-            const toast = document.createElement('div');
-            toast.className = `toast ${type}`;
-            
-            const icon = type === 'success' 
-                ? `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"/><polyline points="22 4 12 14.01 9 11.01"/></svg>`
-                : `<svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="15" y1="9" x2="9" y2="15"/><line x1="9" y1="9" x2="15" y2="15"/></svg>`;
-            
-            toast.innerHTML = `${icon} <span>${message}</span>`;
-            container.appendChild(toast);
-            
-            // Trigger animation
-            setTimeout(() => toast.classList.add('show'), 10);
-            
-            setTimeout(() => {
-                toast.classList.remove('show');
-                setTimeout(() => toast.remove(), 300);
-            }, 3000);
-        }
-
-        function navigate(view) {
-            appState.currentView = view;
-            const views = ['auth-view', 'dashboard-view', 'doctors-view', 'appointments-view', 'admin-view'];
-            views.forEach(v => getEl(v).classList.add('hidden'));
-            
-            getEl(`${view}-view`).classList.remove('hidden');
-            
-            // Navbar visibility
-            if(view === 'auth') {
-                getEl('main-nav').classList.add('hidden');
-            } else {
-                getEl('main-nav').classList.remove('hidden');
-            }
-
-            // View specific logic
-            if(view === 'dashboard') initDashboard();
-            if(view === 'doctors') renderDoctors();
-            if(view === 'appointments') renderAppointments();
-            if(view === 'admin') renderAdmin();
-            
-            window.scrollTo(0,0);
-        }
-
-        // --- Authentication Flow ---
-        function sendOTP() {
-            const phone = getEl('auth-phone').value;
-            if(!phone || phone.length < 5) {
-                showToast('Please enter a valid phone number', 'error');
-                return;
-            }
-            
-            const btn = getEl('btn-send-otp');
-            btn.innerHTML = '<span class="loader"></span> Sending...';
-            btn.disabled = true;
-
-            // Simulate API Call
-            setTimeout(() => {
-                getEl('phone-step').classList.add('hidden');
-                getEl('otp-step').classList.remove('hidden');
-                getEl('display-phone').innerText = phone;
-                btn.innerHTML = 'Send OTP';
-                btn.disabled = false;
-                showToast('OTP sent successfully!');
-            }, MOCK_API_DELAY);
-        }
-
-        function backToPhone() {
-            getEl('otp-step').classList.add('hidden');
-            getEl('phone-step').classList.remove('hidden');
-            getEl('auth-otp').value = '';
-        }
-
-        function verifyOTP() {
-            const otp = getEl('auth-otp').value;
-            const phone = getEl('auth-phone').value;
-            
-            if(otp.length !== 6) {
-                showToast('Enter valid 6-digit OTP', 'error');
-                return;
-            }
-
-            const btn = getEl('btn-verify-otp');
-            btn.innerHTML = '<span class="loader"></span> Verifying...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = 'Verify & Login';
-                btn.disabled = false;
-                
-                // Mock Authentication
-                if(otp === '123456') {
-                    appState.currentUser = {
-                        id: 'usr_' + Date.now(),
-                        name: phone === 'admin' ? 'System Admin' : 'Patient User',
-                        phone: phone,
-                        isAdmin: phone === 'admin'
-                    };
-                    
-                    showToast('Login successful!');
-                    getEl('nav-user-name').innerText = appState.currentUser.name;
-                    
-                    if(appState.currentUser.isAdmin) {
-                        navigate('admin');
-                    } else {
-                        navigate('dashboard');
-                    }
-                } else {
-                    showToast('Invalid OTP. Use 123456.', 'error');
-                }
-            }, MOCK_API_DELAY);
-        }
-
-        function logout() {
-            appState.currentUser = null;
-            getEl('auth-phone').value = '';
-            getEl('auth-otp').value = '';
-            backToPhone();
-            navigate('auth');
-            showToast('Logged out successfully');
-        }
-
-        // --- Dashboard & Patient Views ---
-        function initDashboard() {
-            getEl('dash-user-name').innerText = appState.currentUser.name;
-            getEl('dash-user-phone').innerText = appState.currentUser.phone;
-        }
-
-        function renderDoctors() {
-            const query = getEl('search-doctor').value.toLowerCase();
-            const category = getEl('filter-category').value;
-            
-            const filtered = appState.doctors.filter(d => {
-                const matchName = d.name.toLowerCase().includes(query);
-                const matchCat = category === 'all' || d.category === category;
-                return matchName && matchCat;
-            });
-
-            const listEl = getEl('doctor-list');
-            listEl.innerHTML = '';
-
-            if(filtered.length === 0) {
-                getEl('doctor-empty').classList.remove('hidden');
-                listEl.classList.add('hidden');
-            } else {
-                getEl('doctor-empty').classList.add('hidden');
-                listEl.classList.remove('hidden');
-                
-                filtered.forEach(doc => {
-                    listEl.innerHTML += `
-                        <div class="card doctor-card">
-                            <div>
-                                <div class="doc-header">
-                                    <div class="doc-avatar">${doc.name.charAt(4)}</div>
-                                    <div>
-                                        <h3 style="font-size: 1.1rem;">${doc.name}</h3>
-                                        <p style="font-size: 0.85rem; color: var(--primary); font-weight:500;">${doc.category}</p>
-                                    </div>
-                                </div>
-                                <div class="doc-info mt-2">
-                                    <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg> ${doc.time}</p>
-                                    <p><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/><polyline points="9 22 9 12 15 12 15 22"/></svg> Room: ${doc.room}</p>
-                                </div>
-                            </div>
-                            <button class="btn btn-primary w-full mt-4" style="width:100%" onclick="openBookingModal(${doc.id})">Book Appointment</button>
-                        </div>
-                    `;
-                });
-            }
-        }
-
-        function filterDoctors() { renderDoctors(); }
-
-        function renderAppointments() {
-            const listEl = getEl('appointments-list');
-            const tableContainer = getEl('appointments-table').parentElement;
-            listEl.innerHTML = '';
-
-            // Filter for current user only
-            const myApps = appState.appointments.filter(a => a.patientPhone === appState.currentUser.phone);
-
-            if(myApps.length === 0) {
-                tableContainer.classList.add('hidden');
-                getEl('appointments-empty').classList.remove('hidden');
-            } else {
-                tableContainer.classList.remove('hidden');
-                getEl('appointments-empty').classList.add('hidden');
-
-                myApps.sort((a,b) => new Date(b.date) - new Date(a.date)).forEach(app => {
-                    const statusClass = app.status === 'Booked' ? 'badge-success' : (app.status === 'Cancelled' ? 'badge-danger' : 'badge-warning');
-                    listEl.innerHTML += `
-                        <tr>
-                            <td><strong>${app.docName}</strong></td>
-                            <td>${formatDate(app.date)}</td>
-                            <td>${app.time}</td>
-                            <td>${app.room}</td>
-                            <td><span class="badge ${statusClass}">${app.status}</span></td>
-                            <td>
-                                ${app.status === 'Booked' 
-                                    ? `<button class="btn btn-outline" style="padding: 0.25rem 0.5rem; font-size: 0.75rem; color: var(--danger); border-color: var(--danger);" onclick="cancelAppointment(${app.id})">Cancel</button>` 
-                                    : '-'}
-                            </td>
-                        </tr>
-                    `;
-                });
-            }
-        }
-
-        // --- Booking Flow (Modals) ---
-        function openBookingModal(docId) {
-            const doc = appState.doctors.find(d => d.id === docId);
-            if(!doc) return;
-
-            getEl('booking-doc-id').value = doc.id;
-            getEl('modal-doc-name').innerText = doc.name;
-            getEl('modal-doc-cat').innerText = doc.category;
-            getEl('modal-doc-time').innerText = doc.time;
-            getEl('modal-doc-room').innerText = doc.room;
-            getEl('modal-doc-initial').innerText = doc.name.charAt(4);
-            
-            // Reset form
-            getEl('booking-date').value = '';
-            getEl('booking-time').value = '';
-            
-            // Min date is today
-            const today = new Date().toISOString().split('T')[0];
-            getEl('booking-date').min = today;
-
-            getEl('booking-modal').classList.add('active');
-        }
-
-        function closeModal(modalId) {
-            getEl(modalId).classList.remove('active');
-        }
-
-        function confirmBooking() {
-            const docId = parseInt(getEl('booking-doc-id').value);
-            const date = getEl('booking-date').value;
-            const time = getEl('booking-time').value;
-            const doc = appState.doctors.find(d => d.id === docId);
-
-            const btn = getEl('btn-confirm-booking');
-            btn.innerHTML = '<span class="loader" style="width:16px;height:16px;border-width:2px;"></span> Processing...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = 'Confirm Booking';
-                btn.disabled = false;
-
-                const newApp = {
-                    id: Date.now(),
-                    patientName: appState.currentUser.name,
-                    patientPhone: appState.currentUser.phone,
-                    docId: doc.id,
-                    docName: doc.name,
-                    date: date,
-                    time: time,
-                    room: doc.room,
-                    status: 'Booked'
-                };
-
-                appState.appointments.push(newApp);
-                closeModal('booking-modal');
-                showToast('Appointment booked successfully!');
-                navigate('appointments');
-            }, MOCK_API_DELAY);
-        }
-
-        function cancelAppointment(appId) {
-            if(confirm('Are you sure you want to cancel this appointment?')) {
-                const app = appState.appointments.find(a => a.id === appId);
-                if(app) {
-                    app.status = 'Cancelled';
-                    renderAppointments();
-                    showToast('Appointment cancelled.', 'error');
-                }
-            }
-        }
-
-        // --- Admin Flow ---
-        function switchAdminTab(tabId) {
-            getEl('tab-admin-doctors').classList.remove('active');
-            getEl('tab-admin-appointments').classList.remove('active');
-            getEl('admin-doctors-content').classList.add('hidden');
-            getEl('admin-appointments-content').classList.add('hidden');
-
-            getEl(`tab-${tabId}`).classList.add('active');
-            getEl(`${tabId}-content`).classList.remove('active'); // Typo fix: remove hidden
-            getEl(`${tabId}-content`).classList.remove('hidden');
-
-            if(tabId === 'admin-doctors') renderAdminDoctors();
-            if(tabId === 'admin-appointments') renderAdminAppointments();
-        }
-
-        function renderAdmin() {
-            if(!appState.currentUser.isAdmin) {
-                showToast('Access Denied. Admin privileges required.', 'error');
-                navigate('dashboard');
-                return;
-            }
-            switchAdminTab('admin-doctors');
-        }
-
-        function renderAdminDoctors() {
-            const tbody = getEl('admin-doctor-list');
-            tbody.innerHTML = '';
-            appState.doctors.forEach(doc => {
-                tbody.innerHTML += `
-                    <tr>
-                        <td><strong>${doc.name}</strong></td>
-                        <td>${doc.category}</td>
-                        <td>${doc.room}</td>
-                        <td>
-                            <div class="flex gap-2">
-                                <button class="btn btn-outline" style="padding: 0.25rem 0.5rem;" onclick="editDoctor(${doc.id})">Edit</button>
-                                <button class="btn btn-danger" style="padding: 0.25rem 0.5rem;" onclick="deleteDoctor(${doc.id})">Delete</button>
-                            </div>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function renderAdminAppointments() {
-            const tbody = getEl('admin-all-appointments-list');
-            tbody.innerHTML = '';
-            
-            const sortedApps = [...appState.appointments].sort((a,b) => new Date(b.date) - new Date(a.date));
-            
-            if(sortedApps.length === 0) {
-                tbody.innerHTML = '<tr><td colspan="5" class="text-center">No appointments found.</td></tr>';
-                return;
-            }
-
-            sortedApps.forEach(app => {
-                const statusClass = app.status === 'Booked' ? 'badge-success' : (app.status === 'Cancelled' ? 'badge-danger' : 'badge-warning');
-                tbody.innerHTML += `
-                    <tr>
-                        <td>
-                            <div><strong>${app.patientName}</strong></div>
-                            <div style="font-size:0.75rem; color:var(--text-muted)">${app.patientPhone}</div>
-                        </td>
-                        <td>${app.docName}</td>
-                        <td>
-                            <div>${formatDate(app.date)}</div>
-                            <div style="font-size:0.75rem; color:var(--text-muted)">${app.time}</div>
-                        </td>
-                        <td><span class="badge ${statusClass}">${app.status}</span></td>
-                        <td>
-                            <select onchange="updateAppointmentStatus(${app.id}, this.value)" style="padding:0.25rem; font-size:0.75rem;">
-                                <option value="Booked" ${app.status === 'Booked' ? 'selected' : ''}>Booked</option>
-                                <option value="Completed" ${app.status === 'Completed' ? 'selected' : ''}>Completed</option>
-                                <option value="Cancelled" ${app.status === 'Cancelled' ? 'selected' : ''}>Cancelled</option>
-                            </select>
-                        </td>
-                    </tr>
-                `;
-            });
-        }
-
-        function updateAppointmentStatus(id, newStatus) {
-            const app = appState.appointments.find(a => a.id === id);
-            if(app) {
-                app.status = newStatus;
-                renderAdminAppointments();
-                showToast(`Status updated to ${newStatus}`);
-            }
-        }
-
-        function openAdminDoctorModal(docId = null) {
-            if(docId) {
-                const doc = appState.doctors.find(d => d.id === docId);
-                getEl('admin-doc-modal-title').innerText = 'Edit Doctor';
-                getEl('admin-doc-id').value = doc.id;
-                getEl('admin-doc-name').value = doc.name;
-                getEl('admin-doc-category').value = doc.category;
-                getEl('admin-doc-time').value = doc.time;
-                getEl('admin-doc-room').value = doc.room;
-            } else {
-                getEl('admin-doc-modal-title').innerText = 'Add New Doctor';
-                getEl('admin-doc-form').reset();
-                getEl('admin-doc-id').value = '';
-            }
-            getEl('admin-doctor-modal').classList.add('active');
-        }
-
-        function editDoctor(id) { openAdminDoctorModal(id); }
-
-        function deleteDoctor(id) {
-            if(confirm('Delete this doctor? This action cannot be undone.')) {
-                appState.doctors = appState.doctors.filter(d => d.id !== id);
-                renderAdminDoctors();
-                showToast('Doctor removed successfully.', 'error');
-            }
-        }
-
-        function saveDoctor() {
-            const idVal = getEl('admin-doc-id').value;
-            const name = getEl('admin-doc-name').value;
-            const category = getEl('admin-doc-category').value;
-            const time = getEl('admin-doc-time').value;
-            const room = getEl('admin-doc-room').value;
-
-            const btn = getEl('btn-save-doc');
-            btn.innerHTML = '<span class="loader" style="width:16px;height:16px;border-width:2px;"></span> Saving...';
-            btn.disabled = true;
-
-            setTimeout(() => {
-                btn.innerHTML = 'Save Doctor';
-                btn.disabled = false;
-
-                if(idVal) {
-                    // Update
-                    const doc = appState.doctors.find(d => d.id == idVal);
-                    if(doc) {
-                        doc.name = name; doc.category = category; doc.time = time; doc.room = room;
-                    }
-                    showToast('Doctor updated successfully');
-                } else {
-                    // Add
-                    appState.doctors.push({
-                        id: Date.now(),
-                        name: name, category: category, time: time, room: room
-                    });
-                    showToast('New doctor added successfully');
-                }
-                
-                closeModal('admin-doctor-modal');
-                renderAdminDoctors();
-            }, MOCK_API_DELAY);
-        }
-
-        // --- Utils ---
-        function formatDate(dateStr) {
-            const options = { weekday: 'short', year: 'numeric', month: 'short', day: 'numeric' };
-            return new Date(dateStr).toLocaleDateString('en-US', options);
-        }
-
-        // Initial setup
-        loadData();
-
-    </script>
+    <!-- External JavaScript -->
+    <script src="src/js/app.js"></script>
 </body>
 </html>
